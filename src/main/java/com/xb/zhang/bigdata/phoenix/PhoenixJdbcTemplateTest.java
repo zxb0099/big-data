@@ -1,10 +1,5 @@
 package com.xb.zhang.bigdata.phoenix;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +10,7 @@ import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 
-public class PhoenixTest {
+public class PhoenixJdbcTemplateTest {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception{
