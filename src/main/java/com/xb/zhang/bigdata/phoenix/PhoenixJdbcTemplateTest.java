@@ -17,7 +17,14 @@ public class PhoenixJdbcTemplateTest {
 		
 		ApplicationContext cxt = new ClassPathXmlApplicationContext(new String[]{"config/spring_common.xml"});
 		JdbcTemplate phoenixJdbcTemplate = (JdbcTemplate)cxt.getBean("phoenixJdbcTemplate");
-		List<Map<String, Object>> result = phoenixJdbcTemplate.queryForList("select * from student");
+		// create table
+		phoenixJdbcTemplate.update("create table student_1 (pk varchar not null primary key, info.age varchar, info.sex varchar)");
+		// add column
+		phoenixJdbcTemplate.update("alter table student_1 add course.math varchar(255)");
+		phoenixJdbcTemplate.update("alter table student_1 add course.china varchar(255)");
+		phoenixJdbcTemplate.update("alter table student_1 add course.english varchar(255)");
+		// query all data
+		List<Map<String, Object>> result = phoenixJdbcTemplate.queryForList("select * from student_1");
 		if(StringUtils.isEmpty(result)){
 			System.out.println("result is null !!!");
 		}else{
