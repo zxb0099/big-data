@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-lazy-init="true">
+	<!-- 开启自动切面代理 -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- 开启注解 -->
+	<context:annotation-config />
+	
+	<!-- 使用annotation 自动注册bean -->
+	<context:component-scan base-package="com.xb.zhang" annotation-config="true">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<bean class="com.xb.zhang.utils.spring.SpringContextHolder" lazy-init="false" />
+
+	<!-- 加载配置文件 -->
+	<bean id="propertyMananger" class="com.xb.zhang.utils.spring.DecryptPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>config.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+	</bean>
+	
+	<!-- (父)数据源定义,使用Apache DBCP 连接池 -->
+	<bean id="parentDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="300" />
+		<property name="maxIdleTime" value="5" />
+		<property name="acquireIncrement" value="5" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="acquireRetryAttempts" value="30" />	
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="numHelperThreads" value="5" />	
+		<property name="acquireRetryDelay" value="500" />	
+		<property name="autoCommitOnClose" value="true" />
+		<property name="propertyCycle" value="300" />	
+		<property name="checkoutTimeout" value="5000" />	
+	</bean>
+	
+	<!-- 文件上传配置 -->
+	<bean id="filterMultipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<import resource="classpath*:/config/spring_db_phoenix.xml" />
+	
+</beans>
