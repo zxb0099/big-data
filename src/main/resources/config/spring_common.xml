@@ -33,7 +33,7 @@
 	<!-- (父)数据源定义,使用Apache DBCP 连接池 -->
 	<bean id="parentDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="minPoolSize" value="5" />
-		<property name="maxPoolSize" value="300" />
+		<property name="maxPoolSize" value="100" />
 		<property name="maxIdleTime" value="5" />
 		<property name="acquireIncrement" value="5" />
 		<property name="idleConnectionTestPeriod" value="60" />
@@ -52,5 +52,7 @@
 	</bean>
 	
 	<import resource="classpath*:/config/spring_db_phoenix.xml" />
+	
+	<import resource="classpath*:/config/spring_db_hive.xml" />
 	
 </beans>
