@@ -59,14 +59,14 @@ public class JDBCToHiveUtils {
             System.exit(1);  
         } finally {  
             try {  
+            	if (stmt != null) {  
+                    stmt.close();  
+                    stmt = null;  
+                } 
                 if (conn != null) {  
                     conn.close();  
                     conn = null;  
-                }  
-                if (stmt != null) {  
-                    stmt.close();  
-                    stmt = null;  
-                }  
+                }                   
             } catch (SQLException e) {  
                 e.printStackTrace();  
             }  
