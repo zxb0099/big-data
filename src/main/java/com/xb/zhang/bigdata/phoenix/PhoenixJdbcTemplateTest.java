@@ -23,6 +23,8 @@ public class PhoenixJdbcTemplateTest {
 		phoenixJdbcTemplate.update("alter table student_1 add course.math varchar(255)");
 		phoenixJdbcTemplate.update("alter table student_1 add course.china varchar(255)");
 		phoenixJdbcTemplate.update("alter table student_1 add course.english varchar(255)");
+		// modify column
+		phoenixJdbcTemplate.update("upsert into student_1 (pk,info.age) values('万山红','21')");
 		// query all data
 		List<Map<String, Object>> result = phoenixJdbcTemplate.queryForList("select * from student_1");
 		if(StringUtils.isEmpty(result)){

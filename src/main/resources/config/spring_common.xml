@@ -43,7 +43,6 @@
 		<property name="acquireRetryDelay" value="500" />	
 		<property name="autoCommitOnClose" value="true" />
 		<property name="propertyCycle" value="300" />	
-		<property name="checkoutTimeout" value="5000" />	
 	</bean>
 	
 	<!-- 文件上传配置 -->

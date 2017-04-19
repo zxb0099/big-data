@@ -16,6 +16,7 @@
 	
 	<bean id="phoenix_master_dataSource" parent="parentDataSource">
 		<property name="driverClass" value="org.apache.phoenix.jdbc.PhoenixDriver"/>
+		<property name="checkoutTimeout" value="30000" />	
 		<property name="jdbcUrl">
 			<value>jdbc:phoenix:centos01</value>
 		</property>
